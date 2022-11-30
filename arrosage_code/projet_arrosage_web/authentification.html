@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="icon" href="arrosage.jpg" />
+      <style>
+        .bg-image-vertical {
+          position: relative;
+          overflow: hidden;
+          background-repeat: no-repeat;
+          background-position: right center;
+          background-size: auto 100%;
+          }
+          
+          @media (min-width: 1025px) {
+          .h-custom-2 {
+          height: 100%;
+          }
+          }
+      </style>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
+      rel="stylesheet"
+    />
+    </head>
+    <body>
+      <div class="container">
+      <section class="vh-100">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6 text-black">
+      
+              <div class="px-5 ms-xl-4">
+                <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+                <span class="h1 fw-bold mb-0">Arrosage</span>
+              </div>
+      
+              <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+      
+                <form style="width: 23rem;">
+      
+                  <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+                  
+                  <div class="form-outline mb-4">
+                    <input type="email" id="email" class="form-control form-control-lg" />
+                    <label class="form-label" for="email">Email address</label>
+                  </div>
+      
+                  <div class="form-outline mb-4">
+                    <input type="password" id="pass" class="form-control form-control-lg" />
+                    <label class="form-label" for="pass">Password</label>
+                  </div>
+                  <div id="message" style="visibility: hidden;" class="text-center btn btn-danger"></div>
+                  <div class="pt-1 mb-4">
+                    <button class="btn btn-info btn-lg btn-block" id="submit" type="submit">Login</button>
+                  </div>
+      
+                 
+                </form>
+      
+              </div>
+      
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+              <img src="technique-arrosage-jardin.jpg"
+                alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;background-size: cover;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+  </div>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script type="module">
+            const firebaseConfig = {
+              apiKey: "AIzaSyBAELnY-pucCe84Vzwo0zs8QMCPdbUBCNg",
+              authDomain: "pharmacie-projet.firebaseapp.com",
+              databaseURL: "https://pharmacie-projet-default-rtdb.firebaseio.com",
+              projectId: "pharmacie-projet",
+              storageBucket: "pharmacie-projet.appspot.com",
+              messagingSenderId: "387229418822",
+              appId: "1:387229418822:web:61d3f4084017f64ce09147",
+              measurementId: "G-FLBFCYEBGD"
+            };
+           
+            // Initialize Firebase
+           firebase.initializeApp(firebaseConfig);
+          
+          const auth=firebase.auth();
+           
+           
+           document.getElementById("submit").addEventListener('click', e => {
+            //Get email and pass
+            e.preventDefault();
+            
+            const email=document.getElementById("email").value;
+           const password=document.getElementById("pass").value;
+           
+          
+           auth.signInWithEmailAndPassword(email, password)
+           .then((userCredential) => {
+             console.log("yes")
+             console.log(userCredential);
+             var user = userCredential.user;
+             window.location.href="index.html"
+             // ...
+           })
+           .catch((error) => {
+             var errorCode = error.code;
+             var errorMessage = error.message;
+             console.log(errorMessage);
+             document.getElementById("message").style.visibility="visible";
+             document.getElementById("message").innerHTML=errorMessage;
+           });
+          
+
+           });
+           
+          </script>
+   <!-- MDB -->
+            <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"
+            ></script>
+        </body>
+    </html>
+    
+    
